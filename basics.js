@@ -88,8 +88,18 @@ console.log(myVar1, myVar2)
 // console.log(myVar1, myVar2)
 
 const person = {
+    name: 'hamza',
+    age: 21,
     "person hobbies": ['guitar', 'football', 'games']  // if you want to add space use inverted commas
 }
 // person.person hobbies    // wrong 
 // person['person hobbies']  // will work
 
+for(let key in person){        // here key gives index rather than value
+    console.log(person.key)   // wrong
+    console.log(person[key])  // right
+}
+
+for(let key of Object.keys(person)){
+    console.log(person[key])
+}
