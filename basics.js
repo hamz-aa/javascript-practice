@@ -103,3 +103,27 @@ for(let key in person){        // here key gives index rather than value
 for(let key of Object.keys(person)){
     console.log(person[key])
 }
+
+console.log(Object.keys(person))   // returns an array of keys
+
+const newArr = [...'abc']  // creates an array with three elements a,b,c
+console.log(newArr)         // it requires an iterable  
+
+const obj1 = {
+    key1: 'val1',
+    key2: 'val2'
+}
+const obj2 = {
+    key1: 'val5',
+    key3: 'val3',
+    key4: 'val4'
+}
+
+const newObj = {...obj1, ...obj2, key5:'val5'}    // same key is replaced by the later one
+console.log(newObj)
+
+const newObj1 = {...'abc'}         // creates an object with index as keys
+console.log(newObj1)
+
+let {key3:val1, ...var2} = obj2         // object destructuring
+console.log(val1, var2)
