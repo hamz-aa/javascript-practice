@@ -127,3 +127,11 @@ console.log(newObj1)
 
 let {key3:val1, ...var2} = obj2         // object destructuring
 console.log(val1, var2)
+
+// the (||) operator only moves to its right if its left is false else it returns its left value
+// while the (&&) operator moves to its right only if its left is true else it returns its left value 
+
+console.log(false || 'hamza')   //hamza
+console.log(true || 'hamza')    // true
+console.log(false && 'hamza')   // false
+console.log(true && 'hamza')    // hamza
