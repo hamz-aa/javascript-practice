@@ -75,3 +75,40 @@ console.log(unordered_numbers)
     // also write a - b for ascending sort
     // and b - a for descending sort
 
+
+// find method
+
+const findElement = numbers.find((num) => {
+    return num === 5                              // returns the first element that matches the condition
+})
+
+console.log(findElement)
+
+// every method
+
+const everyElement = numbers.every((num) => num%2===0);   // it returns true only if all elements meet 
+                                                          // the given condition. if even one element is false it returns false               
+console.log(everyElement)
+
+
+// some method
+
+const someElement = numbers.some((num) => num%2===0)   // opposite of every
+                                                       // if even one condition it true, it returns true
+console.log(someElement)
+
+
+// fill method
+
+// const myArray = new Array(10).fill(0)       // initializes an array with 0
+// console.log(myArray)
+
+const myArray = [1,2,3,4,5,6,7,8]
+myArray.fill(0, 2, 5)                // fills array with 0 starting from 2 index and end before 5 index
+console.log(myArray)
+
+
+// splice method
+
+myArray.splice(1, 2, 4)      // splice(start, delete, insert)
+console.log(myArray)
