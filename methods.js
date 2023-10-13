@@ -136,3 +136,212 @@ const user4 = {
 }
 
 user4.about()      // works fine
+
+
+
+// creating object using object.create
+
+const obj1 = {
+    key1: 'val1',
+    key2: 'val2'
+}
+
+const obj2 = Object.create(obj1);
+
+obj2.key3 = 'val3'
+console.log(obj2.key3)
+console.log(obj2.key1)
+                // when created with object.create() method, if an object does not have a key val pair
+                // just like obj2 does not have key1, then it searches in the other object that is passed
+                // in the parenthesis i.e : obj1
+
+console.log(obj2.__proto__)
+                // we can see in concole that there is proto inside obj2
+                // it basically links obj2 with obj1
+
+
+// creating object with function inside
+
+// const human = {
+//     name : 'hamza',
+//     email : 'abc@gmail.com',
+//     age : 21,
+//     about : function(){
+//         console.log(`name is ${this.name} and age is ${this.age}`)
+//     },
+//     is18 : function(){
+//         return this.age >= 18
+//     }
+// }
+
+        // consider the above human object
+        // suppose we have to create another user, what will we do,
+        // we will repeat all the steps again
+        // but this can be minimized through a function
+
+// function createHuman(name, email, age){
+//     const human = {}    
+//     human.name = name
+//     human.age = age
+//     human.email = email
+//     human.about = function(){
+//         console.log(`name is ${this.name} and age is ${this.age}`)
+//     },
+//     human.is18 = function(){
+//         return this.age >= 18
+//     }
+
+//     return human;
+// }
+
+// const human1 = createHuman('hamza', 'abc@gmail.com', 21)
+// const human2 = createHuman('ahsan', 'def@gmail.com', 18)
+
+        // this way we can create multiple objects easily but
+        // there's a problem here
+        // everytime we call createHuman function, it will also create the 
+        // about and is18 function for every object
+        // this can be reduced if these functions are created only once and called
+        // everytime when they are required rather than creating them again and again
+        // for every object
+
+
+const humanMethods = {
+    about : function(){
+        console.log(`name is ${this.name} and age is ${this.age}`)
+    },
+    is18 : function(){
+        return this.age >= 18
+    }
+}
+
+// function createHuman(name, email, age){
+//     const human = {}    
+//     human.name = name
+//     human.age = age
+//     human.email = email
+//     human.about = humanMethods.about,
+//     human.is18 = humanMethods.is18
+
+//     return human;
+// }                       // this also works and is better aproach
+
+            // but there is an even better aproach
+
+// function createHuman(name, email, age){
+//     const human = Object.create(humanMethods)    
+//     human.name = name
+//     human.age = age
+//     human.email = email
+
+//     return human;
+// }
+        // using the object.create that we learned earlier
+        // if we call a key that is not present in our object then
+        // it will search for that key in the object that was passed inside 
+        // the parenthesis, this is done using the __proto__ reference
+
+
+// const human1 = createHuman('hamza', 'abc@gmail.com', 21)
+// const human2 = createHuman('ahsan', 'def@gmail.com', 18)
+
+// human1.about()
+// console.log(human2.is18())
+
+        // there is another way
+
+function hello3(){
+    console.log('hello')
+}
+        // in js, functions work as if function + object
+        
+console.log(hello3.name)     // returns name of function
+
+hello3.myOwnProperty = 'unique'
+
+console.log(hello3.myOwnProperty)
+                    // we can add our own properties to functions just like objects
+
+console.log(hello3.prototype)
+                // functions have empty space for objects inside of them which are
+                // refered through prototype keyword
+                // only functions provide prototype property
+
+hello3.prototype.abc = 'abc';
+hello3.prototype.sing = function(){
+    console.log('la la la')
+}
+console.log(hello3.prototype)      // we can add key val pairs to our prototype object
+                                  // in this way              
+
+
+
+//  now we have another aproach to the above createHuman issue
+// what if instead of creating a new object of humanMethods, 
+// why not utilize the object that is already present inside the function
+
+// function createHuman(name, email, age){
+//     const human = Object.create(createHuman.prototype)       // we can pass prototype here to link    
+//     human.name = name                                        // it with __proto__   
+//     human.age = age
+//     human.email = email
+
+//     return human;
+// }
+
+// createHuman.prototype.about = function(){                        // these methods will be added to the 
+//     console.log(`name is ${this.name} and age is ${this.age}`)      // prototype object
+// }
+// createHuman.prototype.is18 = function(){
+//     return this.age >= 18
+// }
+
+// const human1 = createHuman('hamza', 'abc@gmail.com', 21)
+// const human2 = createHuman('ahsan', 'def@gmail.com', 18)
+
+// human1.about()
+// console.log(human2.is18())
+
+
+// now there is another way too
+// using the new keyword
+
+function createUser(name, age){
+    this.name = name;
+    this.age = age;
+}
+
+createUser.prototype.about = function(){
+    console.log(this.name, this.age);
+}
+
+const user6 = new createUser('hamza', 21)
+user6.about()
+            // now what the new keyword does is that first it initializes an empty object
+            // that can be refered through this keyword i.e : this = {}
+            // then it returns that new object and we store it in user6
+            // it also links __proto__ to prototype that we were doing manually
+            // in the last example
+            // i.e : the about key that we created in prototype is automatically added to __proto__
+
+
+// changing the previous example through new keyword
+
+function CreateHuman(name, email, age){   //this is now called a constructor function so we capitalize the first letter to let the developers know that they should call it using a new keyword
+    this.name = name              // so we remove the object.create
+    this.age = age              // the this object is created and updated with these values
+    this.email = email          // no need to return as this is automatically returned because of new keyword
+}
+
+CreateHuman.prototype.about = function(){                        // these methods will be added to the 
+    console.log(`name is ${this.name} and age is ${this.age}`)      // prototype object
+}
+CreateHuman.prototype.is18 = function(){
+    return this.age >= 18
+}
+
+const human1 = new CreateHuman('hamza', 'abc@gmail.com', 21)   // the this object is returned and stored in
+const human2 = new CreateHuman('ahsan', 'def@gmail.com', 18)   // these human variables     
+
+human1.about()
+console.log(human2.is18())
