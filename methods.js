@@ -345,3 +345,9 @@ const human2 = new CreateHuman('ahsan', 'def@gmail.com', 18)   // these human va
 
 human1.about()
 console.log(human2.is18())
+
+for(let key in human1){               // the in keyword picks keys but it also pick the keys from prototype
+    if (human1.hasOwnProperty(key)){   // this property only picks those keys which are in object but not
+        console.log(key)                // in prototype 
+    }
+}
