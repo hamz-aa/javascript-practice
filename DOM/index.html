@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <!-- <script src="./app.js"></script>   not preferred because the js file loads first and html in not parsed   -->
+    <!-- <script src="./app.js" async></script>  also not good because parsing and loading is done together but just as the js is loaded parsing is stopped -->
+    <script src="./app.js" defer></script>  <!--  parsing and loading is done together but just as the js is loaded, parsing is not stopped -->
     <title>DOM Practice</title>
 </head>
 <body>
@@ -11,14 +14,14 @@
         <nav class="nav container">
             <h1 class="logo">Website</h1>
             <ul class="nav-items">
-                <li><a href="">Home</a></li>
-                <li><a href="">Todo</a></li>
-                <li><a href="">Sign Up</a></li>
+                <li class="nav-item"><a href="#home">Home</a></li>
+                <li class="nav-item"><a href="">Todo</a></li>
+                <li class="nav-item"><a href="">Sign Up</a></li>
             </ul>
         </nav>
 
         <div class="headline">
-            <h2>Manage your tasks</h2>
+            <h2 id="main-heading">Manage your tasks <span style="display: none;">hello</span></h2>
             <button class="btn btn-headline">Learn More</button>
         </div>
     </header>
@@ -62,5 +65,6 @@
         </form>
     </section>
 
+    <!-- <script src="./app.js"></script>  good way but takes too much time  -->
 </body>
 </html>
