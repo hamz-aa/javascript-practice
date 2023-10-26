@@ -54,3 +54,48 @@ console.log(mainHeading3.innerText);       // innerText only reveals the text th
 const link = document.querySelector('a');
 console.log(link.getAttribute('href'));
 link.setAttribute('href', 'https://google.com'); 
+
+
+// get multiple elements
+
+const navItems = document.getElementsByClassName('nav-item');
+console.log(navItems)   // returns HTMLcollection which is an array like object
+console.log(navItems[0])   // since it is an array like object we can do indexing
+console.log(Array.isArray(navItems))  // returns false
+
+const navItems2 = document.querySelectorAll('.nav-item');
+console.log(navItems2)  // returns nodeList which is also an array like object
+console.log(navItems2[0])
+
+// cannot use forEach method on HTMLCollection
+// array-like-objects can be indexed and can have length property
+
+let anchor = document.getElementsByTagName('a');
+
+// for(let i = 0; i < anchor.length; i++){
+//     const navItem = anchor[i];
+//     navItem.style.backgroundColor = '#fff';
+//     navItem.style.color = 'green';
+//     navItem.style.fontWeight = 'bold'
+// }
+
+// for(let navItem of anchor){
+//     const navItem = anchor[i];
+//     navItem.style.backgroundColor = '#fff';
+//     navItem.style.color = 'green';
+//     navItem.style.fontWeight = 'bold'
+// }
+
+// anchor.forEach(navItem => {                    // returns error
+//     navItem.style.backgroundColor = '#fff';
+//     navItem.style.color = 'green';
+//     navItem.style.fontWeight = 'bold'
+// });
+
+// anchor = Array.from(anchor);        // convert HTMLCollection into array
+// anchor.forEach(navItem => {                    // now it works
+//     navItem.style.backgroundColor = '#fff';
+//     navItem.style.color = 'green';
+//     navItem.style.fontWeight = 'bold'
+// });
+
