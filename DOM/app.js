@@ -99,3 +99,44 @@ let anchor = document.getElementsByTagName('a');
 //     navItem.style.fontWeight = 'bold'
 // });
 
+console.log(navItems2)    // querySelecter returns a nodeList
+                // you can use normal for loop, for of and even forEach method on a node list
+// navItems2 = Array.from(navItems2);
+                // you can also convert a nodeList into an array
+
+
+// innerHTML 
+
+const headline = document.querySelector('.headline');
+console.log(headline.innerHTML);
+// headline.innerHTML = '<h1>inner html changed</h1>';    // can change innerHTML of elements
+
+
+
+// accessing DOM through root node
+
+const rootNode = document.getRootNode();
+console.log(rootNode);
+console.log(rootNode.childNodes);   // accessing child nodes
+
+const htmlElementNode = rootNode.childNodes[1];   
+console.log(htmlElementNode);
+
+console.log(htmlElementNode.childNodes);
+
+const headElementNode = htmlElementNode.childNodes[0];
+console.log(headElementNode)
+
+const parentNode = headElementNode.parentNode;   // can also access parent nodes
+console.log(parentNode);
+
+console.log(headElementNode.nextSibling.nextSibling)  // can acess next siblings as well
+
+console.log(headElementNode.nextElementSibling);    // can access next element by ignoring text nodes
+
+const head = document.querySelector('head');
+const title = head.querySelector('title');      // can use querySelector inside other tag names
+console.log(title);
+
+console.log(htmlElementNode.children) // accessing child nodes without accessing text nodes
+
