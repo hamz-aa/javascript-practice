@@ -140,3 +140,94 @@ console.log(title);
 
 console.log(htmlElementNode.children) // accessing child nodes without accessing text nodes
 
+
+// Class List 
+
+const sectionTodo = document.querySelector('.todo-section');
+console.log(sectionTodo.classList)
+
+sectionTodo.classList.add('bg-dark');   // giving classes to elements
+sectionTodo.classList.remove('bg-dark');    // removing classes
+console.log(sectionTodo.classList.contains('bg-dark'));    // checking if class exist in an element
+
+sectionTodo.classList.toggle('bg-dark');   // if a class exists it will remove the class from classList
+                                          // if not then it will add that class to classList
+sectionTodo.classList.toggle('bg-dark');
+
+
+// adding new html elements to page 
+
+const todoList = document.querySelector('.todo-list');
+
+// todoList.innerHTML += '<li>New Todo</li>';   // do not use this method to add elements to html as
+                                                // it can cause performance issues
+
+const newTodoItem = document.createElement('li');  // use this method to create and add elements
+
+// const newTodoText = document.createTextNode('Teach Students');
+// newTodoItem.append(newTodoText);              // long way of creating and adding text
+ 
+newTodoItem.textContent = 'Teach Students';    // short way of adding text          
+console.log(newTodoItem);
+
+todoList.append(newTodoItem);     // add elements at the end
+todoList.prepend(newTodoItem);      // add elements at the beginning
+newTodoItem.remove();     // removing an element
+
+// todoList.before(newTodoItem);   // inserting element before an element
+// todoList.after(newTodoItem);    // inserting element after an element
+
+// todoList.insertAdjacentHTML('beforeend', '<li>teach students</li>')   // another way to add elements
+// todoList.insertAdjacentHTML('afterbegin', '<li>teach students</li>')  // inside the given element
+
+// todoList.insertAdjacentHTML('afterend', '<li>teach students</li>')  // another way to add elements
+// todoList.insertAdjacentHTML('beforebegin', '<li>teach students</li>')  // outside the given element
+
+
+// clone nodes 
+
+const newTodoItem2 = newTodoItem.cloneNode(true);   // use true for deep cloning
+todoList.append(newTodoItem)                    // clones even the child nodes of the given node
+todoList.prepend(newTodoItem2)                  // means that textContent will also be cloned
+
+// todoList.appendChild(newTodoItem)     // does same work as normal append
+// todoList.insertBefore(newTodoItem2, newTodoItem)     // these methods are for use in IE
+// todoList.replaceChild(newTodoItem2, newTodoItem)
+todoList.removeChild(newTodoItem);
+todoList.removeChild(newTodoItem2);
+
+
+// static list vs live list 
+
+const listItems = document.querySelectorAll('.todo-list li');
+console.log(listItems);
+
+const sixthListItem = document.createElement('li');
+sixthListItem.textContent = 'item 6';
+todoList.append(sixthListItem);
+
+console.log(listItems);
+                    // even though we have added a new element to our todo list
+                    // the nodeList still shows the previous five elements
+                    // but not the new element that we added
+
+                    // the list obtained through querySelectorAll is a static list
+                    // there its size remains the same
+
+                    // while the list obtained through getElementById, getElementByClassName etc
+                    // is a live list and can therefore be changed
+
+const newListItems = todoList.getElementsByTagName('li');
+console.log(newListItems);        // the HTMLCollection shows six li elements
+
+
+// getting dimensions of element 
+
+const info = todoList.getBoundingClientRect();
+console.log(info)
+console.log(info.height)
+console.log(info.width)
+
+
+
+// intro to events 
