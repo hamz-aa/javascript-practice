@@ -231,3 +231,67 @@ console.log(info.width)
 
 
 // intro to events 
+
+// three ways to add events
+// 1) directly through html, for instance: onclick
+
+// 2) through js, for instance:
+const btnHeadline = document.querySelector('.btn-headline');
+btnHeadline.onclick = function(){
+    console.log('you clicked me !!!');
+}           
+            // onclick is a property inside the object of btnHeadline
+            // so we can assign a value to it in this way
+            // still not useful way as you cannot assign click event more than one time
+
+// 3) through js addEventListener, for instance:
+btnHeadline.addEventListener('click', () => {
+    console.log('got clicked !!!')
+})
+
+
+// this keyword inside event listeners
+
+// case 1: inside an anonymous function
+btnHeadline.addEventListener('click', function() {
+    console.log(this)
+})      // in the above case, this keyword returns the entire HTML of the button
+
+// case 2: inside an arrow function
+btnHeadline.addEventListener('click', () => {
+    console.log(this)
+})      // in this scenario, this keyword returns the window object
+        // in reality the this of arrow function is one level above
+        // i.e : in our case, one level above is the window
+        // however in case of function inside a function
+        // the this of inner function will return the outer function
+        // as one level above from the inner function is the outer function
+
+// event object inside event Listener
+btnHeadline.addEventListener('click', (e) => {
+    console.log(e);
+    console.log(e.target)
+    console.log(e.currentTarget)
+})
+        // returns information about event performed
+
+
+// keypress event
+
+const body = document.body;
+
+body.addEventListener('keypress', (e) => {
+    console.log(e);
+    console.log('key pressed : ', e.key);
+})
+
+// mouseover event
+
+btnHeadline.addEventListener('mouseover', ()=>{
+    console.log('mouse over event!')
+})
+
+// mouseleave event
+btnHeadline.addEventListener('mouseleave', ()=>{
+    console.log('mouse leave event!')
+})
