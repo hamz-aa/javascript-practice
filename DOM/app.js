@@ -295,3 +295,53 @@ btnHeadline.addEventListener('mouseover', ()=>{
 btnHeadline.addEventListener('mouseleave', ()=>{
     console.log('mouse leave event!')
 })
+
+
+
+// event bubbling (propagation)
+
+const grandParent = document.querySelector('.grandparent');
+const parent = document.querySelector('.parent');
+const child = document.querySelector('.child');
+
+// child.addEventListener('click', ()=>{
+//     console.log('you clicked on child');
+// })
+// parent.addEventListener('click', ()=>{
+//     console.log('you clicked on parent');
+// })
+// grandParent.addEventListener('click', ()=>{
+//     console.log('you clicked on grandparent');
+// })
+// document.body.addEventListener('click', ()=>{
+//     console.log('you clicked on body');
+// })
+                // if an event applied on child is also applied on parent then
+                // then the browser will call that event for the parent itself if the child event is provoked
+                // i.e : in our example the same click event that is applied on child is also
+                // applied on parent, so by clicking the child the event for parent will also be
+                // called by the browser. this is called event bubbling.
+
+
+// event capturing
+
+child.addEventListener('click', ()=>{
+    console.log('capture child');
+}, true)
+parent.addEventListener('click', ()=>{
+    console.log('capture parent');
+}, true)
+grandParent.addEventListener('click', ()=>{
+    console.log('capture grandparent');
+}, true)
+document.body.addEventListener('click', ()=>{
+    console.log('capture body');
+}, true)
+                // the capturing works opposite to that of bubbling
+                // when the inner most child is clicked, it checks if the parent has a 
+                // capture event, it then checks if the parent of that parent has a 
+                // capture event and it goes on till body.
+                // so the first event returned is the top most one or in our case
+                // the body capture event.
+
+// event delegation
