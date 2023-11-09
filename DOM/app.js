@@ -15,7 +15,7 @@ console.log(mainHeading1);
 
 
 // querySelector
-const mainHeading2 = document.querySelector('#main-heading');     
+const mainHeading2 = document.querySelector('#main-heading');
 console.log(mainHeading2);
 
 const navItem = document.querySelector('.nav-item')
@@ -35,7 +35,7 @@ console.log(mainHeading3.textContent)       // returns text inside the tag
 // textContent vs innerText
 console.log(mainHeading3.textContent);     // textContent reveals all the text that is inside the tags
 console.log(mainHeading3.innerText);       // innerText only reveals the text that is displayed on the browser
-                                            // i.e: it doesnot display hidden text
+// i.e: it doesnot display hidden text
 
 
 // styling elements 
@@ -53,7 +53,7 @@ console.log(mainHeading3.innerText);       // innerText only reveals the text th
 
 const link = document.querySelector('a');
 console.log(link.getAttribute('href'));
-link.setAttribute('href', 'https://google.com'); 
+link.setAttribute('href', 'https://google.com');
 
 
 // get multiple elements
@@ -100,9 +100,9 @@ let anchor = document.getElementsByTagName('a');
 // });
 
 console.log(navItems2)    // querySelecter returns a nodeList
-                // you can use normal for loop, for of and even forEach method on a node list
+// you can use normal for loop, for of and even forEach method on a node list
 // navItems2 = Array.from(navItems2);
-                // you can also convert a nodeList into an array
+// you can also convert a nodeList into an array
 
 
 // innerHTML 
@@ -119,7 +119,7 @@ const rootNode = document.getRootNode();
 console.log(rootNode);
 console.log(rootNode.childNodes);   // accessing child nodes
 
-const htmlElementNode = rootNode.childNodes[1];   
+const htmlElementNode = rootNode.childNodes[1];
 console.log(htmlElementNode);
 
 console.log(htmlElementNode.childNodes);
@@ -151,7 +151,7 @@ sectionTodo.classList.remove('bg-dark');    // removing classes
 console.log(sectionTodo.classList.contains('bg-dark'));    // checking if class exist in an element
 
 sectionTodo.classList.toggle('bg-dark');   // if a class exists it will remove the class from classList
-                                          // if not then it will add that class to classList
+// if not then it will add that class to classList
 sectionTodo.classList.toggle('bg-dark');
 
 
@@ -160,13 +160,13 @@ sectionTodo.classList.toggle('bg-dark');
 const todoList = document.querySelector('.todo-list');
 
 // todoList.innerHTML += '<li>New Todo</li>';   // do not use this method to add elements to html as
-                                                // it can cause performance issues
+// it can cause performance issues
 
 const newTodoItem = document.createElement('li');  // use this method to create and add elements
 
 // const newTodoText = document.createTextNode('Teach Students');
 // newTodoItem.append(newTodoText);              // long way of creating and adding text
- 
+
 newTodoItem.textContent = 'Teach Students';    // short way of adding text          
 console.log(newTodoItem);
 
@@ -199,23 +199,23 @@ todoList.removeChild(newTodoItem2);
 
 // static list vs live list 
 
-const listItems = document.querySelectorAll('.todo-list li');
-console.log(listItems);
+// const listItems = document.querySelectorAll('.todo-list li');
+// console.log(listItems);
 
-const sixthListItem = document.createElement('li');
-sixthListItem.textContent = 'item 6';
-todoList.append(sixthListItem);
+// const sixthListItem = document.createElement('li');
+// sixthListItem.textContent = 'item 6';
+// todoList.append(sixthListItem);
 
-console.log(listItems);
-                    // even though we have added a new element to our todo list
-                    // the nodeList still shows the previous five elements
-                    // but not the new element that we added
+// console.log(listItems);
+// even though we have added a new element to our todo list
+// the nodeList still shows the previous five elements
+// but not the new element that we added
 
-                    // the list obtained through querySelectorAll is a static list
-                    // there its size remains the same
+// the list obtained through querySelectorAll is a static list
+// there its size remains the same
 
-                    // while the list obtained through getElementById, getElementByClassName etc
-                    // is a live list and can therefore be changed
+// while the list obtained through getElementById, getElementByClassName etc
+// is a live list and can therefore be changed
 
 const newListItems = todoList.getElementsByTagName('li');
 console.log(newListItems);        // the HTMLCollection shows six li elements
@@ -237,12 +237,12 @@ console.log(info.width)
 
 // 2) through js, for instance:
 const btnHeadline = document.querySelector('.btn-headline');
-btnHeadline.onclick = function(){
+btnHeadline.onclick = function () {
     console.log('you clicked me !!!');
-}           
-            // onclick is a property inside the object of btnHeadline
-            // so we can assign a value to it in this way
-            // still not useful way as you cannot assign click event more than one time
+}
+// onclick is a property inside the object of btnHeadline
+// so we can assign a value to it in this way
+// still not useful way as you cannot assign click event more than one time
 
 // 3) through js addEventListener, for instance:
 btnHeadline.addEventListener('click', () => {
@@ -253,7 +253,7 @@ btnHeadline.addEventListener('click', () => {
 // this keyword inside event listeners
 
 // case 1: inside an anonymous function
-btnHeadline.addEventListener('click', function() {
+btnHeadline.addEventListener('click', function () {
     console.log(this)
 })      // in the above case, this keyword returns the entire HTML of the button
 
@@ -261,11 +261,11 @@ btnHeadline.addEventListener('click', function() {
 btnHeadline.addEventListener('click', () => {
     console.log(this)
 })      // in this scenario, this keyword returns the window object
-        // in reality the this of arrow function is one level above
-        // i.e : in our case, one level above is the window
-        // however in case of function inside a function
-        // the this of inner function will return the outer function
-        // as one level above from the inner function is the outer function
+// in reality the this of arrow function is one level above
+// i.e : in our case, one level above is the window
+// however in case of function inside a function
+// the this of inner function will return the outer function
+// as one level above from the inner function is the outer function
 
 // event object inside event Listener
 btnHeadline.addEventListener('click', (e) => {
@@ -273,7 +273,7 @@ btnHeadline.addEventListener('click', (e) => {
     console.log(e.target)
     console.log(e.currentTarget)
 })
-        // returns information about event performed
+// returns information about event performed
 
 
 // keypress event
@@ -287,12 +287,12 @@ body.addEventListener('keypress', (e) => {
 
 // mouseover event
 
-btnHeadline.addEventListener('mouseover', ()=>{
+btnHeadline.addEventListener('mouseover', () => {
     console.log('mouse over event!')
 })
 
 // mouseleave event
-btnHeadline.addEventListener('mouseleave', ()=>{
+btnHeadline.addEventListener('mouseleave', () => {
     console.log('mouse leave event!')
 })
 
@@ -316,32 +316,81 @@ const child = document.querySelector('.child');
 // document.body.addEventListener('click', ()=>{
 //     console.log('you clicked on body');
 // })
-                // if an event applied on child is also applied on parent then
-                // then the browser will call that event for the parent itself if the child event is provoked
-                // i.e : in our example the same click event that is applied on child is also
-                // applied on parent, so by clicking the child the event for parent will also be
-                // called by the browser. this is called event bubbling.
+// if an event applied on child is also applied on parent then
+// then the browser will call that event for the parent itself if the child event is provoked
+// i.e : in our example the same click event that is applied on child is also
+// applied on parent, so by clicking the child the event for parent will also be
+// called by the browser. this is called event bubbling.
 
 
 // event capturing
 
-child.addEventListener('click', ()=>{
-    console.log('capture child');
-}, true)
-parent.addEventListener('click', ()=>{
-    console.log('capture parent');
-}, true)
-grandParent.addEventListener('click', ()=>{
-    console.log('capture grandparent');
-}, true)
-document.body.addEventListener('click', ()=>{
-    console.log('capture body');
-}, true)
-                // the capturing works opposite to that of bubbling
-                // when the inner most child is clicked, it checks if the parent has a 
-                // capture event, it then checks if the parent of that parent has a 
-                // capture event and it goes on till body.
-                // so the first event returned is the top most one or in our case
-                // the body capture event.
+// child.addEventListener('click', ()=>{
+//     console.log('capture child');
+// }, true)
+// parent.addEventListener('click', ()=>{
+//     console.log('capture parent');
+// }, true)
+// grandParent.addEventListener('click', ()=>{
+//     console.log('capture grandparent');
+// }, true)
+// document.body.addEventListener('click', ()=>{
+//     console.log('capture body');
+// }, true)
+// the capturing works opposite to that of bubbling
+// when the inner most child is clicked, it checks if the parent has a 
+// capture event, it then checks if the parent of that parent has a 
+// capture event and it goes on till body.
+// so the first event returned is the top most one or in our case
+// the body capture event.
+
 
 // event delegation
+
+// grandParent.addEventListener('click', () => {
+//     console.log('clicked grandparent');
+// })              // the event applied on a parent is also applied on all of its childs
+// so by clicking the child we also get the event of grandparent even though
+// there is no event on the child.
+
+// grandParent.addEventListener('click', (e) => {
+//     console.log(e);
+// })              // if we check the output we see an object in the console.
+// if we check the target in that object, we see that it is
+// the  element that we clicked on but not the grandparent
+
+grandParent.addEventListener('click', (e) => {
+    console.log(e.target);
+})              // this way we don't need to have seperate events for parent and
+                // child. we can utilize the event of grandparent.
+
+
+
+// project usinng event delegation
+
+const todoForm = document.querySelector('.todo-form');
+const todoInput = document.querySelector(".todo-form input[type='text']")
+
+todoForm.addEventListener('submit', (e)=>{
+    e.preventDefault();     // prevents the page from refreshing everytime enter or button is pressed
+    const newTodoText = todoInput.value;
+    const newLi = document.createElement('li');
+    newLi.innerHTML = `<span class="text">${newTodoText}</span>
+    <div class="todo-buttons">
+        <button class="todo-btn done">Done</button>
+        <button class="todo-btn remove">Remove</button>
+    </div>`
+    todoInput.value = '';
+    todoList.prepend(newLi);
+})
+
+todoList.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('remove')){
+        targetLi = e.target.parentNode.parentNode;
+        targetLi.remove();
+    }
+    else if(e.target.classList.contains('done')){
+        const liSpan = e.target.parentNode.previousElementSibling;
+        liSpan.style.textDecoration = 'line-through';
+    }
+})
