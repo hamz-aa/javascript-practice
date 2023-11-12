@@ -28,3 +28,44 @@ for(let i = 0; i < 100; i++){
 }
 
 console.log('script end');
+
+
+// setTimeOut returns an ID
+console.log(setTimeout(()=>{
+                console.log('inside setTimeOut');
+            }, 1000));
+
+
+
+// clearTimeOut
+console.log('script start');
+
+const id = setTimeout(()=>{
+    console.log('inside setTimeOut clear');
+}, 1000);
+
+for(let i = 0; i < 100; i++){
+    console.log('...');
+}
+
+clearTimeout(id);   // the setTimeOut will be cleared and will not run
+
+console.log('script end');
+
+
+// setInterval
+
+console.log('script start');
+
+// setInterval(()=>{
+//     console.log(Math.random());
+// }, 1000);
+                // the setInterval keeps calling the function again and again after the specified
+                // time, i.e : in our case its 1000ms or 1 second.
+
+for(let i = 0; i < 100; i++){
+    console.log('...');
+}
+
+console.log('script end');
+
