@@ -157,4 +157,107 @@ friedRice.then((myFriedRice)=>{
 }).catch((error)=>{
     console.log(error)
 });
+            // the promise is consumed by the browser. so after executing all the 
+            // remaining js, then the promise is consumed i.e : it isn't done in a
+            // sequential flow but works just like the setTimeOut function
+            // discussed above
 
+
+
+// function returning a promise
+
+function ricePromise(){
+    let bucket = ['coffee', 'chips', 'vegetables', 'salt', 'rice'];
+    return new Promise((resolve, reject)=>{
+        if(bucket.includes('vegetables') && bucket.includes('salt') && bucket.includes('rice')){
+            resolve('Fried Rice');
+        }
+        else {
+            reject('Couldn\'t do it' );
+        }
+    });
+}
+
+ricePromise().then((myFriedRice)=>{
+    console.log('Lets eat', myFriedRice);
+}, (error)=>{
+    console.log(error)
+});
+
+
+
+// resolve / reject a promise after some time
+
+function myPromise(){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            flag = true;
+            if(flag){
+                resolve();
+            }
+            else{
+                reject();
+            }
+        }, 2000)
+    })
+}
+
+myPromise().then(()=>{console.log('resolved')}).catch(()=>{console.log('rejected')})
+
+
+// resolve method in promise
+
+const promiseResolve = Promise.resolve(7);
+promiseResolve.then(val=>{console.log(val)})
+        // then method always returns a promise
+
+// promise chaining
+
+function myPromise2(){
+    return new Promise((resolve, reject)=>{
+        resolve('foo')
+    })
+}
+
+myPromise2().then((val)=>{
+    console.log(val);
+    val += 'bar';
+    return val;             // 'then' here will not just return a val but will return an entire promise
+}).then((val)=>{            //  this promise can again be caught by another 'then' and create a chain
+    console.log(val);
+})
+
+
+
+// using promise to solve callback hell
+
+function changeText(element, text, color, time){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            if (element){
+                element.textContent = text;
+                element.style.color = color;
+                resolve();
+            } else {
+                reject('element not found');      
+            }
+        }, 1000)
+    })
+}
+
+// as we know that the above function returns a promise which we can save in a variable
+const returnedPromise = changeText(heading1, '1', 'green', 1000);
+returnedPromise.then(()=>{       // we can use then method on the returned promise
+    return changeText(heading2, '2', 'red', 1000);
+})
+.then(()=>changeText(heading3, '3', 'green', 1000))
+.then(()=>changeText(heading4, '4', 'purple', 1000))
+.then(()=>changeText(heading5, '5', 'violet', 1000))
+.then(()=>changeText(heading6, '6', 'yellow', 1000))
+.then(()=>changeText(heading7, '7', 'cyan', 1000))
+.catch((error)=>{
+    alert(error);
+})
+            // in this way the issue of callback hell is solved through the use
+            // of promises. we can also use catch method in case anything
+            // goes wrong with the above code
