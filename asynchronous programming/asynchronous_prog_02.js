@@ -108,3 +108,119 @@ newXHR2.onerror = () => {
 }
 
 newXHR2.send();
+
+
+
+// xhr using promises
+
+const newURL4 = 'https://jsonplaceholder.typicode.com/posts';
+
+function sendRequest(method, url){
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+
+        xhr.open(method, url);
+
+        xhr.onload = () => {
+            if(xhr.status >= 200 && xhr.status < 300){
+                resolve(xhr.response);
+            }
+            else {
+                reject(new Error('something went wrong'));
+            }
+        }
+
+        xhr.onerror = () => {
+            reject(new Error('network error'));
+        }
+
+        xhr.send();
+    });
+}
+
+sendRequest('GET', newURL4).then(response => {
+    const data = JSON.parse(response);
+    console.log(data);
+    return data[4].id;
+}).then(id => {
+    const url = `${newURL4}/${id}`;
+    return sendRequest('GET', url);
+}).then(response => {
+    const newResponse = JSON.parse(response);
+    console.log(newResponse);
+}).catch(error => {
+    console.log(error);
+})
+
+
+
+// fetch
+
+const fetchURL = 'https://jsonplaceholder.typicode.com/posts';
+
+// The functionality of the above xhr code that we wrote is automatically provided to
+// us through fetch. By default, fetch uses the GET method and returns a promise.
+const whatisthis = fetch(fetchURL);
+console.log(whatisthis);     // promise
+
+// since whatisthis is a promise, we can use 'then' method
+whatisthis.then(response => {
+    if(response.ok){    // see catch method below for explanation
+        // the response parameter does not give us the JSON that we are looking for
+        console.log(response);
+
+        // so instead we call the json method on response object
+        // console.log(response.json());       // this also returns a promise
+
+        return response.json();
+    }
+    else {
+        throw new Error('something went wrong');
+    }
+})
+.then(data => {
+    // this gives us the data that we are looking for
+    console.log(data);
+})
+.catch(error => {
+    console.log(error);
+    // the above error will not be displayed.
+    // this is because the promise in fetch is only rejected in case of
+    // network errors. so we cannot display any other forms of errors like 404 not found.
+    // in such cases we can use 'response.ok' which returns false for errors. 
+})
+
+
+// using POST method to add data to the API
+
+// for POST, we add a second argument to the fetch method.
+// the second argument asks us about the method which is POST.
+// then we pass the data that we want to post and convert that data to
+// string as data on server can only be stored in string format.
+// finally we pass the header content.
+fetch(fetchURL, {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+})
+.then(response => {
+    if(response.ok){
+        console.log(response);
+        return response.json();
+    }
+    else {
+        throw new Error('something went wrong');
+    }
+})
+.then(data => {
+    console.log(data);
+})
+.catch(error => {
+    console.log(error);
+})
